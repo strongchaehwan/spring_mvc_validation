@@ -48,6 +48,7 @@ public class ValidationItemControllerV4 {
     @PostMapping("/add")
     public String addItem(@Validated @ModelAttribute("item") ItemSaveDto itemSaveDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
+        log.info("컨트롤러 호출");
         // 글로벌 오류
         if (itemSaveDto.getPrice() != null && itemSaveDto.getQuantity() != null) {
             int resultPrice = itemSaveDto.getPrice() * itemSaveDto.getQuantity();
@@ -63,6 +64,8 @@ public class ValidationItemControllerV4 {
             log.error("errors={}", bindingResult);
             return "validation/v4/addForm";
         }
+
+        log.info("성공 로직 실행");
 
         Item item = Item.builder().itemName(itemSaveDto.getItemName())
                 .price(itemSaveDto.getPrice())
@@ -85,6 +88,7 @@ public class ValidationItemControllerV4 {
 
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateDto updateDto, BindingResult bindingResult) {
+
 
         // 글로벌 오류
         if (updateDto.getPrice() != null && updateDto.getQuantity() != null) {
