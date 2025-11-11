@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 public class ItemValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-        return Item.class.isAssignableFrom(clazz); // item == clazz이냐?(자식클래스까지)
+        return Item.class.isAssignableFrom(clazz); // item == clazz이냐?(item 자식클래스까지?)
 
     }
 
