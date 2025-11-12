@@ -67,13 +67,13 @@ public class ValidationItemControllerV4 {
 
         log.info("성공 로직 실행");
 
-        Item item = Item.builder().itemName(itemSaveDto.getItemName())
-                .price(itemSaveDto.getPrice())
-                .quantity(itemSaveDto.getQuantity()).build();
+//        Item item = Item.builder().itemName(itemSaveDto.getItemName())
+//                .price(itemSaveDto.getPrice())
+//                .quantity(itemSaveDto.getQuantity()).build();
 
 
         // 성공 로직
-        Item savedItem = itemRepository.save(item);
+        Item savedItem = itemRepository.save2(itemSaveDto);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/validation/v4/items/{itemId}";
@@ -107,13 +107,7 @@ public class ValidationItemControllerV4 {
         }
 
 
-        Item item = Item.builder().id(updateDto.getId())
-                .itemName(updateDto.getItemName())
-                .price(updateDto.getPrice())
-                .quantity(updateDto.getQuantity()).build();
-
-
-        itemRepository.update(itemId, item);
+        itemRepository.update2(itemId, updateDto);
         return "redirect:/validation/v4/items/{itemId}";
     }
 

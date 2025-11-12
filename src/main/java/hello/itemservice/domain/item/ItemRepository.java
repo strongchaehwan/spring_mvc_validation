@@ -1,5 +1,7 @@
 package hello.itemservice.domain.item;
 
+import hello.itemservice.web.validation.dto.ItemSaveDto;
+import hello.itemservice.web.validation.dto.ItemUpdateDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,6 +21,12 @@ public class ItemRepository {
         return item;
     }
 
+    public Item save2(ItemSaveDto itemSaveDto) {
+        Item item = Item.builder().id(++sequence).itemName(itemSaveDto.getItemName()).price(itemSaveDto.getPrice()).quantity(itemSaveDto.getQuantity()).build();
+        store.put(item.getId(), item);
+        return item;
+    }
+
     public Item findById(Long id) {
         return store.get(id);
     }
@@ -32,6 +40,13 @@ public class ItemRepository {
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
+    }
+
+    public void update2(Long itemId, ItemUpdateDto itemUpdateDto) {
+        Item item = findById(itemId);
+        item.setItemName(itemUpdateDto.getItemName());
+        item.setPrice(itemUpdateDto.getPrice());
+        item.setQuantity(itemUpdateDto.getQuantity());
     }
 
     public void clearStore() {

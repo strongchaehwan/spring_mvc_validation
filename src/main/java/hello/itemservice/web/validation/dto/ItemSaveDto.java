@@ -18,6 +18,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ItemSaveDto {
 
+    /**
+     * 에러 메시지는 errors.properties에서 작성하자.
+     * ex) NotBlank.item.itemName = 상품을 작성해주세요
+     */
 
     @NotBlank
     private String itemName;

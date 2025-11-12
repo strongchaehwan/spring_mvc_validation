@@ -21,7 +21,7 @@ public class ValidationItemApiController {
        log.info("API 컨트롤러 호출");
 
        if(bindingResult.hasErrors()){
-           log.info("검증 오류 발생 errors={}",bindingResult);
+           log.error("검증 오류 발생 errors={}",bindingResult);
            return bindingResult.getAllErrors();
        }
 
